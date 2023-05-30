@@ -20,6 +20,19 @@ CRUD routes:
 - PUT /titles/:id - Modify a movie title provided by the user.
 - DELETE /titles/:id - Remove a movie title 
 
+## Model
+const movie = new Schema({
+ - title: String,
+ - releaseYear: Number,
+ - actors: String,
+ - description: String,
+  - rating: {
+  -  type: Number,
+  -  min: 1,
+  -  max: 4
+- });
+
+
 
 ## MVP Goals
 - As a user, I should be able to search for movies by title/actor.
@@ -30,5 +43,5 @@ CRUD routes:
 
 ## Stretch Goals
 - As a user, I would like to be able to create an account to save a list of films.
-- As a user, I would like to share my movies with friends.
-- As a user, I would like to make my own catergories of films.
+- As a user, I would like to share movies with friends.
+- As a user, I would like to search by specific genres. 
