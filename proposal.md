@@ -20,7 +20,7 @@ CRUD routes:
 - PUT /titles/:id - Modify a movie title provided by the user.
 - DELETE /titles/:id - Remove a movie title 
 
-## Model
+## Models
 const titles = new Schema({
  - name: String,
  - releaseYear: Number,
@@ -30,6 +30,11 @@ const titles = new Schema({
   -  type: Number,
   -  min: 1,
   -  max: 4
+- });
+
+const actors = new Schema({
+- name: String,
+- age: Number,
 - });
 
 
