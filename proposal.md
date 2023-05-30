@@ -10,10 +10,10 @@ For this project, I have chosen to use the Movies Database API. You can find the
 As a user, I should be able to:
 
 CRUD routes:
-- GET /actors/:id - Retrieve a specific actor by their ID.
+- GET /actors/:name - Retrieve a specific actor by their ID.
 - POST /actors - Create a new actor by sending actor data in the request body.
-- PUT /actors/:id - Update a specific actor by replacing their existing data with new data sent in the request body.
-- DELETE /actors/:id - Delete a specific actor by their ID.
+- PUT /actors/:name- Update a specific actor by replacing their existing data with new data sent in the request body.
+- DELETE /actors/:name - Delete a specific actor by their ID.
 - GET /titles - Retrieve a selection of movie titles.
 - GET /titles/:id - Fetch a specific movie title 
 - POST /titles - create a new movie title contributed by the user.
@@ -32,23 +32,19 @@ const titles = new Schema({
 - });
 
 const actors = new Schema({
+
 - name: String,
 - age: Number,
 - movies: String,
 - gender: String,
-- });
-
-## TO-DO
-- change :id to name for actors
-- Add known for ref
-- confirm ombd api is usable
-- include delete, full CRUD in mvp
-
+- knownFor: { type: Schema.Types.ObjectID, ref: "Title"}
+});
 
 ## MVP Goals
 - As a user, I should be able to view a list of general movie titles.
 - As a user, I should be able to view basic movie information(ratings, year).
 - As a user, I should be able to view basic information about actors.
+- As a user, I should be able to delete a movie and actor.
 - As a user, I should experience a website that has a user-friendly and responsive interface.
 
 ## Stretch Goals
