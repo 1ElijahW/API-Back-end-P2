@@ -16,8 +16,7 @@ CRUD routes:
 - DELETE /actors/:id - Delete a specific actor by their ID.
 - GET /titles - Retrieve a selection of movie titles.
 - GET /titles/:id - Fetch a specific movie title 
-- POST /titles - creates a new movie title contributed by the user.
-- PUT /titles/:id - Modify a movie title provided by the user.
+- POST /titles - create a new movie title contributed by the user.
 - DELETE /titles/:id - Remove a movie title 
 
 ## Models
@@ -36,18 +35,19 @@ const actors = new Schema({
 - name: String,
 - age: Number,
 - movies: String,
+- gender: String,
 - });
 
 
 
 ## MVP Goals
-- As a user, I should be able to search for movies by title/actor.
-- As a user, I should be able to see a list of general movie titles.
-- As a user, I should be able to view basic movie information(ratings, date).
+- As a user, I should be able to view a list of general movie titles.
+- As a user, I should be able to view basic movie information(ratings, year).
 - As a user, I should be able to view basic information about actors.
 - As a user, I should experience a website that has a user-friendly and responsive interface.
 
 ## Stretch Goals
 - As a user, I would like to be able to create an account to save a list of films.
-- As a user, I would like to share movies with friends.
 - As a user, I would like to search by specific genres. 
+- As a user, I would like to share movies with friends.
+
