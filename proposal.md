@@ -15,14 +15,14 @@ CRUD routes:
 - PUT /actors/:id - Update a specific actor by replacing their existing data with new data sent in the request body.(name, age, etc)
 - DELETE /actors/:id - Delete a specific actor by their ID.
 - GET /titles - Retrieve a selection of movie titles.
-- GET /title/:id - Fetch a specific movie title 
-- POST /title - creates a new movie title contributed by the user.
+- GET /titles/:id - Fetch a specific movie title 
+- POST /titles - creates a new movie title contributed by the user.
 - PUT /titles/:id - Modify a movie title provided by the user.
 - DELETE /titles/:id - Remove a movie title 
 
 ## Model
-const movie = new Schema({
- - title: String,
+const titles = new Schema({
+ - name: String,
  - releaseYear: Number,
  - actors: String,
  - description: String,
