@@ -29,8 +29,9 @@ CRUD routes:
    - type: Number,
   - min: 1,
   - max: 4
- - }
+  }
 - });
+
 
 - const actors = new Schema({
  - name: String,
