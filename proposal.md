@@ -26,12 +26,11 @@ CRUD routes:
 -  actors: String,
  - description: String,
  - rating: {
-   - type: Number,
+ - type: Number,
   - min: 1,
   - max: 4 }
 - });
-
-
+##
 
 - const actors = new Schema({
  - name: String,
