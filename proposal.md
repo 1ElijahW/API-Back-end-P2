@@ -1,27 +1,36 @@
 ## Project Proposal
 ## Project Goal and Purpose
-The goal of this project is to create a user-friendly website called "Cineflix" that allows visitors to search for movies by title or names of actors. The purpose is to provide users with an efficient way to find the movies they are looking for and expand their options by having access to a larger pool of results.
+The goal of this project is to create a user-friendly website called "Cineflix" that allows visitors to search for movies by title or actor, and get basic information on that film. The purpose is to provide users with an efficient way to find the movies they are looking for and expand their options by having access to a larger pool of results.
 
 ## Choice of API and Integration
-For this project, I have chosen to use the Movies Database API. You can find the API documentation by clicking here. I will integrate this API by making HTTP requests directly to the API endpoints using the 'Fetch' method.
+For this project, I have chosen to use the Movies Database API. You can find the API documentation by clicking [HERE](https://rapidapi.com/SAdrian/api/moviesdatabase) . I will integrate this API by making HTTP requests directly to the API endpoints using the 'Fetch' method.
 
-## Data Model and Seeding the Database
-[Provide details about your data model and how you plan to seed your database. Include information about the entities, their relationships, and how you will populate the initial data.]
 
 ## User Stories
 As a user, I should be able to:
+- query /titles route to (GET) titles of Movies (retrieve)
+- query /actors/:id to retrieve information about a specific actor by their ID (GET)
+- query  /titles/:id to get a 
 
-- Search for movies by title
-- Search for movies by names of actors
-- See a list of popular movies
-- Filter movies by genre
+CRUD routes:
+- GET /actors/:id - Retrieve a specific actor by their ID.
+- POST /actors - Create a new actor by sending actor data in the request body.
+- PUT /actors/:id - Update a specific actor by replacing their existing data with new data sent in the request body.
+- DELETE /actors/:id - Delete a specific actor by their ID.
+- GET /titles - Retrieves a selection of movie titles requested by the user.
+- GET /title/:id - Fetches a specific movie title based on user input
+- POST /title - Stores an existing movie title in the user's collection or creates a new movie title contributed by the user.
+- PUT /movie-titles/:id - Modifies a movie title provided by the user.
+- DELETE /movie-titles/:id - Removes a movie title created by the user.
+
 
 ## MVP Goals
-- As a user, I should be able to search for movies by title or names of actors.
-- As a user, I should be able to view detailed information about a specific movie.
-- As a user, I should be able to see a list of popular movies.
+- As a user, I should be able to search for movies by title/actor.
+- As a user, I should be able to see a list of general movie titles.
+- As a user, I should be able to delete my entry 
+
 
 ## Stretch Goals
-- As a user, I should be able to filter movies by genre.
-- As a user, I should be able to save movies to a watchlist.
-- As a user, I should be able to rate and review movies.
+- As a user, I would like to share my movies with friends.
+- As a user, I would like to create my own catergories of films.
+- As a user, I would like to see information about the director.
