@@ -14,11 +14,11 @@ CRUD routes:
 - POST /actors - Create a new actor by sending actor data in the request body.
 - PUT /actors/:id - Update a specific actor by replacing their existing data with new data sent in the request body.(name, age, etc)
 - DELETE /actors/:id - Delete a specific actor by their ID.
-- GET /titles - Retrieves a selection of movie titles requested by the user.
-- GET /title/:id - Fetches a specific movie title based on user input
-- POST /title - Stores an existing movie title in the user's collection or creates a new movie title contributed by the user.
-- PUT /movie-titles/:id - Modifies a movie title provided by the user.
-- DELETE /movie-titles/:id - Removes a movie title created by the user.
+- GET /titles - Retrieve a selection of movie titles.
+- GET /title/:id - Fetch a specific movie title 
+- POST /title - creates a new movie title contributed by the user.
+- PUT /titles/:id - Modify a movie title provided by the user.
+- DELETE /titles/:id - Remove a movie title 
 
 
 ## MVP Goals
