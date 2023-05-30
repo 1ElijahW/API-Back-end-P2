@@ -21,24 +21,25 @@ CRUD routes:
 
 ## Models
 const titles = new Schema({
- - name: String,
- - releaseYear: Number,
- - actors: String,
- - description: String,
-  - rating: {
-  -  type: Number,
-  -  min: 1,
-  -  max: 4
-- });
+  name: String,
+  releaseYear: Number,
+  actors: String,
+  description: String,
+  rating: {
+    type: Number,
+    min: 1,
+    max: 4
+  }
+});
 
 const actors = new Schema({
-
-- name: String,
-- age: Number,
-- movies: String,
-- gender: String,
-- knownFor: { type: Schema.Types.ObjectID, ref: "Title"}
+  name: String,
+  age: Number,
+  movies: String,
+  gender: String,
+  knownFor: { type: Schema.Types.ObjectId, ref: "Title" }
 });
+
 
 ## MVP Goals
 - As a user, I should be able to view a list of general movie titles.
