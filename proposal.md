@@ -32,6 +32,7 @@ CRUD routes:
 - });
 
 
+
 - const actors = new Schema({
  - name: String,
  - age: Number,
