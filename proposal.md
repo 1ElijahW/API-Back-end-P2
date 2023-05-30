@@ -15,9 +15,9 @@ CRUD routes:
 - PUT /actors/:name- Update a specific actor by replacing their existing data with new data sent in the request body.
 - DELETE /actors/:name - Delete a specific actor by their ID.
 - GET /titles - Retrieve a selection of movie titles.
-- GET /titles/:id - Fetch a specific movie title 
+- GET /titles/:name - Fetch a specific movie title 
 - POST /titles - create a new movie title contributed by the user.
-- DELETE /titles/:id - Remove a movie title 
+- DELETE /titles/:name- Remove a movie title 
 
 ## Models
 Titles Schema
