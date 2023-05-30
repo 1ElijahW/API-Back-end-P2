@@ -12,7 +12,7 @@ As a user, I should be able to:
 CRUD routes:
 - GET /actors/:id - Retrieve a specific actor by their ID.
 - POST /actors - Create a new actor by sending actor data in the request body.
-- PUT /actors/:id - Update a specific actor by replacing their existing data with new data sent in the request body.(name, age, etc)
+- PUT /actors/:id - Update a specific actor by replacing their existing data with new data sent in the request body.
 - DELETE /actors/:id - Delete a specific actor by their ID.
 - GET /titles - Retrieve a selection of movie titles.
 - GET /titles/:id - Fetch a specific movie title 
@@ -35,6 +35,7 @@ const titles = new Schema({
 const actors = new Schema({
 - name: String,
 - age: Number,
+- movies: String,
 - });
 
 
