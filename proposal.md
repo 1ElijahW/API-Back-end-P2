@@ -38,6 +38,11 @@ const actors = new Schema({
 - gender: String,
 - });
 
+## TO-DO
+- change :id to name for actors
+- Add known for ref
+- confirm ombd api is usable
+- include delete, full CRUD in mvp
 
 
 ## MVP Goals
