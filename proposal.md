@@ -8,9 +8,6 @@ For this project, I have chosen to use the Movies Database API. You can find the
 
 ## User Stories
 As a user, I should be able to:
-- query /titles route to (GET) titles of Movies (retrieve)
-- query /actors/:id to retrieve information about a specific actor by their ID (GET)
-- query  /titles/:id to get a 
 
 CRUD routes:
 - GET /actors/:id - Retrieve a specific actor by their ID.
