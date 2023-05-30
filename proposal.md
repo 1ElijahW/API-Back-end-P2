@@ -20,27 +20,73 @@ CRUD routes:
 - DELETE /titles/:id - Remove a movie title 
 
 ## Models
+Titles Schema
 ```
-const titles = new Schema({
-  name: String,
-  releaseYear: Number,
-  actors: String,
-  description: String,
-  rating: {
-  type: Number,
-  min: 1,
-  max: 4 
-});
-```
+const mongoose = require('mongoose');
+const { Schema } = mongoose;
 
+const titlesSchema = new Schema({
+  name: {
+    type: String,
+    required: true
+  },
+  releaseYear: {
+    type: Number,
+    required: true
+  },
+  actors: {
+    type: [String],
+    required: true
+  },
+  description: {
+    type: String,
+    required: true
+  },
+  rating: {
+    type: Number,
+    min: 1,
+    max: 4,
+    required: true
+  }
+});
+
+const Title = mongoose.model('Title', titleSchema);
+
+module.exports = Title;
 ```
- const actors = new Schema({
-   name: String,
-   age: Number,
-   movies: String,
-   gender: String,
-   knownFor: { type: Schema.Types.ObjectId, ref: "Title" }
+Actor Schema
+```
+const mongoose = require('mongoose');
+const { Schema } = mongoose;
+
+ const actorsSchema = new Schema({
+const actorsSchema = new Schema({
+  name: {
+    type: String,
+    required: true
+  },
+  age: {
+    type: Number,
+    required: true
+  },
+  movies: {
+    type: [String],
+    required: true
+  },
+  gender: {
+    type: String,
+    required: true
+  },
+  knownFor: {
+    type: Schema.Types.ObjectId,
+    ref: 'Title',
+    required: true
+  }
  });
+ 
+ const Actor = mongoose.model('Actor', actorsSchema);
+
+module.exports = Actor;
 ```
 
 ## MVP Goals
