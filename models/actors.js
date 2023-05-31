@@ -25,6 +25,6 @@ const actorsSchema = new Schema({
   }
  });
  
- const Actor = mongoose.model('Actor', actorsSchema);
+ const actors = mongoose.model('actors', actorsSchema);
 
-module.exports = Actor;
+module.exports = actors;

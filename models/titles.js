@@ -26,6 +26,6 @@ const titlesSchema = new Schema({
   }
 });
 
-const Title = mongoose.model('Title', titleSchema);
+const titles = mongoose.model('titles', titlesSchema);
 
-module.exports = Title;
+module.exports = titles;
