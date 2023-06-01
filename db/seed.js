@@ -1,36 +1,43 @@
-const fs = require('fs');
-const axios = require('axios');
+const fs = require("fs");
+const axios = require("axios");
 
-const api_key = '245d7e38';
-const search_query = 'James Bond';
+const api_key = "245d7e38";
+const search_query = "James Bond";
 
 // Make the API request
 const url = `http://www.omdbapi.com/?s=${search_query}&apikey=${api_key}`;
 axios.get(url)
-  .then(response => {
+  .then((response) => {
     const data = response.data;
 
-    // Create an array for movie titles
-    const titleData = [];
-
-    // Extract and add movie titles to the array
-    data.Search.forEach(movie => {
-      titleData.push(movie.Title);
+    // Create an array of movie objects with desired properties
+    const movieData = data.Search.map((movie) => {
+      console.log(movie)
+      return {
+        title: movie.Title,
+        year: movie.Year,
+        rated: movie.Rated 
+      };
     });
 
-    // Convert movie titles array to JSON
-    const jsonData = JSON.stringify(titleData, null, 2);
+    // Create an object with a "movies" property containing the movie data
+    const schema = {
+      movies: movieData,
+    };
+
+    // Convert schema object to JSON
+    const jsonData = JSON.stringify(schema, null, 2);
 
     // Save JSON data to a file
-    const fileName = 'data.json'; // Specify the file name here
-    fs.writeFile(fileName, jsonData, err => {
+    const fileName = "data.json"; // Specify the file name here
+    fs.writeFile(fileName, jsonData, (err) => {
       if (err) {
-        console.error('Error writing to file:', err);
+        console.error("Error writing to file:", err);
       } else {
         console.log(`Data saved to ${fileName}`);
       }
     });
   })
-  .catch(error => {
-    console.error('Error retrieving movie data:', error);
+  .catch((error) => {
+    console.error("Error retrieving movie data:", error);
   });

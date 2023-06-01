@@ -1,30 +1,30 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 const { Schema } = mongoose;
 
 const actorsSchema = new Schema({
   name: {
     type: String,
-    required: true
+    required: true,
   },
   age: {
     type: Number,
-    required: true
+    required: true,
   },
   movies: {
     type: [String],
-    required: true
+    required: true,
   },
   gender: {
     type: String,
-    required: true
+    required: true,
   },
   knownFor: {
     type: Schema.Types.ObjectId,
-    ref: 'Title',
-    required: true
-  }
- });
- 
- const actors = mongoose.model('actors', actorsSchema);
+    ref: "Title",
+    required: true,
+  },
+});
 
-module.exports = actors;
+const actors = mongoose.model("actors", actorsSchema);
+
+export default actors;
