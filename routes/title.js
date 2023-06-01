@@ -1,18 +1,18 @@
 // import
-const express = require("express");
-const router = express.Route();
-const titlesController = require("../controllers/title.js");
+ import express from "express";
+ import router from express.Router();
+ import titlesController from "../controllers/title.js";
 
 //Get general titles 
-router.get('/titles/', controller.getTitle) 
+router.get('/titles/', controller.getTitle) //working
 
 // Get a specific title by name
-router.get('/titles/:name', controller.getTitle)
+router.get('/titles/:name', controller.getTitle) //not working
 
 //Update a title by name
-router.put ('/titles/:name', controller.updateTitle)
+router.put ('/titles/:name', controller.updateTitle) //not working
 
 // Delete a title by name
-router.delete('/titles/:name',controller.deleteTitle) 
+router.delete('/titles/:name',controller.deleteTitle) //not working
 
 module.exports = router;

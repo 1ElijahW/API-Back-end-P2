@@ -1,18 +1,18 @@
 
 const express = require("express");
-const route = express.Route();
+const router = express.Router();
 const actorsController = require("../controllers/actor.js");
 
 //Get a specific actor by name
-route.get('/actor/:name', controller.getActor) 
+router.get('/actor/:name', controller.getActor) //not working
 
 //Add a actor by name
-route.post('/actors/:name', controller.addActor)
+router.post('/actors/:name', controller.addActor) //not working
 
 //Update a actor by name
-route.put ('/actors/:name', controller.updateActor)
+router.put ('/actors/:name', controller.updateActor) //not working
 
 // Delete actors by name
-route.delete('/actors/:name',controller.deleteActor) 
+router.delete('/actors/:name',controller.deleteActor) //not working
 
-module.exports = route;
+module.exports = router;

@@ -1,8 +1,11 @@
-const fs = require("fs");
-const axios = require("axios");
+import fs from 'fs';
+import axios from 'axios';
 
 const api_key = "245d7e38";
 const search_query = "James Bond";
+
+// Descriptive endpoint
+// http://www.omdbapi.com/?t=James+Bond&plot=full&apikey=245d7e38
 
 // Make the API request
 const url = `http://www.omdbapi.com/?s=${search_query}&apikey=${api_key}`;
