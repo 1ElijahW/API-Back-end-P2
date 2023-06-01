@@ -15,4 +15,4 @@ router.put ('/titles/:name', controller.updateTitle)
 // Delete a title by name
 router.delete('/titles/:name',controller.deleteTitle) 
 
-module.exports = router;
+module.exports = route;

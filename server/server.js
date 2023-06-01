@@ -1,9 +1,9 @@
 // MODULES
 import express from 'express'
 import * as dotenv from 'dotenv'
-import cors from 'cors'
-import { writeFile } from 'fs'
-import axios from 'axios'
+
+
+const PORT = 8000
 
 //GET ROUTES//
 app.get
@@ -41,3 +41,13 @@ app.post
 
 //DELETE ROUTES//
 app.get
+
+
+
+
+
+
+
+app.listen(PORT, ()=> {
+    console.log(`Running on port ${PORT}`)
+})
