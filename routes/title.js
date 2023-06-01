@@ -1,7 +1,7 @@
 // import
  import express from "express";
- import router from express.Router();
  import titlesController from "../controllers/title.js";
+ import router from express.Router();
 
 //Get general titles 
 router.get('/titles/', controller.getTitle) //working
