@@ -2,28 +2,28 @@ import mongoose from 'mongoose';
 const { Schema } = mongoose;
 
 const titlesSchema = new Schema({
-  name: {
+  title: {
     type: String,
     required: true
   },
-  releaseYear: {
+  released: {
     type: Number,
     required: true
   },
-  actors: {
-    type: [String],
-    required: true
-  },
-  description: {
-    type: String,
-    required: true
-  },
-  rating: {
-    type: Number,
-    min: 1,
-    max: 4,
-    required: true
-  }
+  // actors: {
+  //   type: [String],
+  //   required: true
+  // },
+  // description: {
+  //   type: String,
+  //   required: true
+  // },
+  // rating: {
+  //   type: Number,
+  //   min: 1,
+  //   max: 4,
+  //   required: true
+  // }
 });
 
 const titles = mongoose.model('titles', titlesSchema);
