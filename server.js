@@ -3,6 +3,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import titles from '../API-Back-end-P2/models/titles.js';
+import directors from '../API-Back-end-P2/models/director.js';
 import data from '../API-Back-end-P2/data/data.json' assert { type: 'json' };
 
 
