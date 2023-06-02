@@ -1,4 +1,4 @@
-import mongoose from ('mongoose');
+import mongoose from 'mongoose';
 
 const directorSchema = new mongoose.Schema({
   name: {
@@ -27,4 +27,4 @@ const directorSchema = new mongoose.Schema({
 
 const Director = mongoose.model('Director', directorSchema);
 
-module.exports = Director;
+export default Director;

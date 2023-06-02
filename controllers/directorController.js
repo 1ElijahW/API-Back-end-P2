@@ -1,6 +1,6 @@
 // directorController.js
 
-import Director from '../models/director.js';
+import Director from '../models/directors.js';
 
 // Get a specific director by name
 async function getSingleDirector(req, res) {
