@@ -1,7 +1,6 @@
-import mongoose from 'mongoose';
-const { Schema } = mongoose;
+import mongoose from ('mongoose');
 
-const titlesSchema = new Schema({
+const titleSchema = new mongoose.Schema({
   title: {
     type: String,
     required: true
@@ -10,12 +9,30 @@ const titlesSchema = new Schema({
     type: Number,
     required: true
   },
-   Rated: {
-    type: [String],
+  director: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Director',
     required: true
   },
+  imdbId: {
+    type: String,
+    required: true,
+    unique: true
+  },
+  plot: {
+    type: String
+  },
+  runtime: {
+    type: String
+  },
+  genre: {
+    type: String
+  },
+  imageUrl: {
+    type: String
+  }
 });
 
-const titles = mongoose.model('titles', titlesSchema);
+const Title = mongoose.model('Title', titleSchema);
 
-export default titles;
+module.exports = Title;

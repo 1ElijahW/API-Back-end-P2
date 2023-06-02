@@ -1,21 +1,9 @@
-import titles from "../models/titles";
-
-export const getTitle = {
-  index: (req, res) => {
-    titles.find({})
-      .then((titles) => {
-        res.json(titles);
-      })
-      .catch((error) => {
-        res.status(500).json({ error: "Failed to retrieve titles" });
-      });
-  },
-};
+import Title from "../models/title.js";
 
 export const getSingleTitle = (req, res) => {
   const movieTitle = req.params.name;
   // Retrieve the movie title from the database using the provided name
-  titles.findOne({ name: movieTitle })
+  Title.findOne({ title: movieTitle })
     .then((foundTitle) => {
       if (foundTitle) {
         // Send the movie title data as the response
@@ -34,7 +22,7 @@ export const createTitle = (req, res) => {
   const movieTitle = req.params.name;
   const titleData = req.body;
   // Create a new movie title in the database using the provided name and title data
-  titles.create({ name: movieTitle, ...titleData })
+  Title.create({ title: movieTitle, ...titleData })
     .then((createdTitle) => {
       // Send a success response indicating the movie title was created
       res.status(201).json({ message: "Movie title created successfully" });
@@ -44,10 +32,29 @@ export const createTitle = (req, res) => {
     });
 };
 
+export const updateTitle = (req, res) => {
+  const movieTitle = req.params.name;
+  const updatedData = req.body;
+  // Update the movie title in the database based on the provided name and updated data
+  Title.findOneAndUpdate({ title: movieTitle }, updatedData, { new: true })
+    .then((updatedTitle) => {
+      if (updatedTitle) {
+        // Send the updated movie title data as the response
+        res.status(200).json(updatedTitle);
+      } else {
+        // If the movie title is not found, send a 404 error response
+        res.status(404).json({ error: "Movie title not found" });
+      }
+    })
+    .catch((error) => {
+      res.status(500).json({ error: "Failed to update movie title" });
+    });
+};
+
 export const deleteTitle = (req, res) => {
   const movieTitle = req.params.name;
   // Delete the movie title from the database based on the provided name
-  titles.deleteOne({ name: movieTitle })
+  Title.deleteOne({ title: movieTitle })
     .then((deletedTitle) => {
       if (deletedTitle.deletedCount > 0) {
         // Send a success response indicating the movie title was deleted

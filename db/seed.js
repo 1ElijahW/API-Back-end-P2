@@ -6,24 +6,37 @@ const search_query = "No Time To Die";
 
 async function seedData() {
   try {
-    // Make the API request
-    const url = `http://www.omdbapi.com/?s=${search_query}&apikey=${api_key}`;
-    const response = await axios.get(url);
-    const data = response.data;
+    // Make the API request for titles
+    const titlesUrl = `http://www.omdbapi.com/?s=${search_query}&apikey=${api_key}`;
+    const titlesResponse = await axios.get(titlesUrl);
+    const titlesData = titlesResponse.data;
 
     // Create an array of movie objects with desired properties
-    const movieData = data.Search.map((movie) => {
-      console.log(movie);
+    const titleData = titlesData.Search.map((title) => {
       return {
-        title: movie.Title,
-        year: movie.Year,
-        rated: movie.Rated,
+        title: title.Title,
+        year: title.Year,
+        imdbId: title.imdbID
       };
     });
 
-    // Create an object with a "movies" property containing the movie data
+    // Make the API request for directors
+    const directorsUrl = `http://www.omdbapi.com/?s=${search_query}&type=movie&apikey=${api_key}`;
+    const directorsResponse = await axios.get(directorsUrl);
+    const directorsData = directorsResponse.data;
+
+    // Create an array of director objects with desired properties
+    const directorData = directorsData.Search.map((director) => {
+      return {
+        name: director.Director,
+        imdbId: director.imdbID
+      };
+    });
+
+    // Create an object with "titles" and "directors" properties containing the respective data
     const schema = {
-      movies: movieData,
+      titles: titleData,
+      directors: directorData
     };
 
     // Convert schema object to JSON
@@ -34,10 +47,8 @@ async function seedData() {
     await fs.promises.writeFile(fileName, jsonData);
     console.log(`Data saved to ${fileName}`);
   } catch (error) {
-    console.error("Error retrieving movie data:", error);
+    console.error("Error retrieving data:", error);
   }
 }
 
 seedData();
-
- 
