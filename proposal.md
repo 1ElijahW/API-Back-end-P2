@@ -9,17 +9,19 @@ For this project, I have chosen to use the Movies Database API. You can find the
 ## User Stories
 As a user, I should be able to:
 
-CRUD routes:
+-CRUD routes:
 -GET /titles/ - This route is used to retrieve a selection of movie titles.
 -GET /titles/:name - This route is used to fetch a specific movie title by its name.
 -POST /titles/:name - This route is used to create a new movie title contributed by the user.
 -PUT /titles/:name - This route is used to update a specific movie title by its name.
 -DELETE /titles/:name - This route is used to remove a movie title by its name.
+
 ##
-GET /directors/:name - Fetch a specific director by name.
-POST /directors/:name - Create a new director contributed by the user.
-PUT /directors/:name - Update a specific director by name.
-DELETE /directors/:name - Remove a director by name.
+
+-GET /directors/:name - Fetch a specific director by name.
+-POST /directors/:name - Create a new director contributed by the user.
+-PUT /directors/:name - Update a specific director by name.
+-DELETE /directors/:name - Remove a director by name.
 
 ## Models
 Titles Schema
