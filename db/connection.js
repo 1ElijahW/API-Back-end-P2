@@ -1,9 +1,11 @@
 // connection.js
-import  mongoose from 'mongoose';
-require('dotenv').config();
+import mongoose from 'mongoose';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('MongoDB connected...'))
   .catch(err => console.log(err));
 
-module.exports = mongoose;
+export default mongoose;
