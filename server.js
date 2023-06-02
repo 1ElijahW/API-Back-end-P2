@@ -1,61 +1,34 @@
-import fs from 'fs';
-import axios from 'axios';
-import Movie from './models/movie.js';
-import Rating from './models/rating.js';
+import express from 'express';
+import mongoose from 'mongoose';
+import dotenv from 'dotenv';
+import seedData from './seed.js';
 
-const api_key = '245d7e38';
-const search_query = 'James Bond';
+dotenv.config();
 
-async function seedData() {
-  try {
-    // Make the API request for movie data
-    const apiUrl = `http://www.omdbapi.com/?s=${search_query}&apikey=${api_key}`;
-    const response = await axios.get(apiUrl);
-    const data = response.data;
+const port = process.env.PORT || 8080;
 
-    // Create an array of movie objects with desired properties
-    const movieData = data.Search.map((movie) => {
-      return {
-        title: movie.Title,
-        year: parseInt(movie.Year),
-        genre: '', // Add the genre property if available
-        director: '', // Add the director property if available
-        plot: '', // Add the plot property if available
-      };
-    });
+const app = express();
 
-    // Save movieData to the database
-    await Movie.insertMany(movieData);
+// MongoDB connection URL
+const MONGODB_URI = process.env.MONGODB_URI;
 
-    console.log('Movie data seeded successfully');
+// Connect to MongoDB
+mongoose
+  .connect(MONGODB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => {
+    console.log('Connected to MongoDB');
 
-    // Make the API request for rating data
-    const ratingPromises = movieData.map(async (movie) => {
-      const ratingUrl = `http://www.omdbapi.com/?i=${movie.imdbId}&apikey=${api_key}`;
-      const ratingResponse = await axios.get(ratingUrl);
-      const ratingData = ratingResponse.data;
+    // Call the seedData function to start seeding the data
+    seedData();
+  })
+  .catch((error) => {
+    console.error('Error connecting to MongoDB:', error);
+  });
 
-      // Extract the desired rating information
-      const ratings = ratingData.Ratings.map((rating) => {
-        return {
-          source: rating.Source,
-          value: parseFloat(rating.Value),
-        };
-      });
+  app.listen(port, () => {
+    console.log(`Server is running on port ${port}`);
+  });
 
-      // Create an array of rating objects with desired properties
-      const ratingObjects = ratings.map((rating) => new Rating(rating));
-
-      // Save the ratings to the database
-      await Rating.insertMany(ratingObjects);
-    });
-
-    await Promise.all(ratingPromises);
-
-    console.log('Rating data seeded successfully');
-  } catch (error) {
-    console.error('Error seeding data:', error);
-  }
-}
-
-seedData();

@@ -1,9 +1,8 @@
-import fs from 'fs';
 import axios from 'axios';
 import Movie from './models/movie.js';
 import Rating from './models/rating.js';
 
-const api_key = '245d7e38';
+const api_key = process.env.API_KEY;
 const search_query = 'James Bond';
 
 async function seedData() {
@@ -49,9 +48,10 @@ async function seedData() {
     await Promise.all(ratingPromises);
 
     console.log('Rating data seeded successfully');
+
   } catch (error) {
     console.error('Error seeding data:', error);
   }
 }
 
-seedData();
+export default seedData;
