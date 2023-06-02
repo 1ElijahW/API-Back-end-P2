@@ -1,53 +1,56 @@
 import fs from 'fs';
 import axios from 'axios';
+import Movie from './models/movie.js';
+import Rating from './models/rating.js';
 
-const api_key = "245d7e38";
-const search_query = "No Time To Die";
+const api_key = '245d7e38';
+const search_query = 'James Bond';
 
 async function seedData() {
   try {
-    // Make the API request for titles
-    const titlesUrl = `http://www.omdbapi.com/?s=${search_query}&apikey=${api_key}`;
-    const titlesResponse = await axios.get(titlesUrl);
-    const titlesData = titlesResponse.data;
+    // Make the API request for movie data
+    const apiUrl = `http://www.omdbapi.com/?s=${search_query}&apikey=${api_key}`;
+    const response = await axios.get(apiUrl);
+    const data = response.data;
 
     // Create an array of movie objects with desired properties
-    const titleData = titlesData.Search.map((title) => {
+    const movieData = data.Search.map((movie) => {
       return {
-        title: title.Title,
-        year: title.Year,
-        imdbId: title.imdbID
+        title: movie.Title,
+        year: movie.Year,
+        imdbId: movie.imdbID,
       };
     });
 
-    // Make the API request for directors
-    const directorsUrl = `http://www.omdbapi.com/?s=${search_query}&type=movie&apikey=${api_key}`;
-    const directorsResponse = await axios.get(directorsUrl);
-    const directorsData = directorsResponse.data;
+    // Save movieData to the database
+    await Movie.insertMany(movieData);
 
-    // Create an array of director objects with desired properties
-    const directorData = directorsData.Search.map((director) => {
-      return {
-        name: director.Director,
-        imdbId: director.imdbID
-      };
+    console.log('Movie data seeded successfully');
+
+    // Make the API request for rating data
+    const ratingPromises = movieData.map(async (movie) => {
+      const ratingUrl = `http://www.omdbapi.com/?i=${movie.imdbId}&apikey=${api_key}`;
+      const ratingResponse = await axios.get(ratingUrl);
+      const ratingData = ratingResponse.data;
+
+      // Extract the desired rating information
+      const ratings = ratingData.Ratings.map((rating) => {
+        return {
+          source: rating.Source,
+          value: rating.Value,
+          movieId: movie._id,
+        };
+      });
+
+      // Save the ratings to the database
+      await Rating.insertMany(ratings);
     });
 
-    // Create an object with "titles" and "directors" properties containing the respective data
-    const schema = {
-      titles: titleData,
-      directors: directorData
-    };
+    await Promise.all(ratingPromises);
 
-    // Convert schema object to JSON
-    const jsonData = JSON.stringify(schema, null, 2);
-
-    // Save JSON data to a file
-    const fileName = "data.json"; // Specify the file name here
-    await fs.promises.writeFile(fileName, jsonData);
-    console.log(`Data saved to ${fileName}`);
+    console.log('Rating data seeded successfully');
   } catch (error) {
-    console.error("Error retrieving data:", error);
+    console.error('Error seeding data:', error);
   }
 }
 

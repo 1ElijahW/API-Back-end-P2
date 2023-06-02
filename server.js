@@ -1,39 +1,61 @@
-// Import required modules
-import express from 'express';
-import dotenv from 'dotenv';
-import mongoose from 'mongoose';
-import titles from '../API-Back-end-P2/models/titles.js';
-import director from './models/directors.js';
-import data from '../API-Back-end-P2/data/data.json' assert { type: 'json' };
+import fs from 'fs';
+import axios from 'axios';
+import Movie from './models/movie.js';
+import Rating from './models/rating.js';
 
+const api_key = '245d7e38';
+const search_query = 'James Bond';
 
-// Load environment variables from .env file
-dotenv.config();
+async function seedData() {
+  try {
+    // Make the API request for movie data
+    const apiUrl = `http://www.omdbapi.com/?s=${search_query}&apikey=${api_key}`;
+    const response = await axios.get(apiUrl);
+    const data = response.data;
 
-// Create an instance of the Express application
-const app = express();
-
-// Parse incoming JSON data
-app.use(express.json());
-
-// Connect to MongoDB database
-mongoose.connect(process.env.MONGODB_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
-  .then(() => {
-    // If the connection is successful, log a success message
-    console.log('Connected to MongoDB');
-
-    // Get the port number from the environment variable or use a default value of 8080
-    const PORT = process.env.PORT || 8080;
-
-    // Start the server and listen on the specified port
-    app.listen(PORT, () => {
-      console.log(`Running on port ${PORT}`);
+    // Create an array of movie objects with desired properties
+    const movieData = data.Search.map((movie) => {
+      return {
+        title: movie.Title,
+        year: parseInt(movie.Year),
+        genre: '', // Add the genre property if available
+        director: '', // Add the director property if available
+        plot: '', // Add the plot property if available
+      };
     });
-  })
-  .catch((err) => {
-    // If there is an error connecting to the database, log the error message
-    console.error('Failed to connect to MongoDB', err);
-  });
+
+    // Save movieData to the database
+    await Movie.insertMany(movieData);
+
+    console.log('Movie data seeded successfully');
+
+    // Make the API request for rating data
+    const ratingPromises = movieData.map(async (movie) => {
+      const ratingUrl = `http://www.omdbapi.com/?i=${movie.imdbId}&apikey=${api_key}`;
+      const ratingResponse = await axios.get(ratingUrl);
+      const ratingData = ratingResponse.data;
+
+      // Extract the desired rating information
+      const ratings = ratingData.Ratings.map((rating) => {
+        return {
+          source: rating.Source,
+          value: parseFloat(rating.Value),
+        };
+      });
+
+      // Create an array of rating objects with desired properties
+      const ratingObjects = ratings.map((rating) => new Rating(rating));
+
+      // Save the ratings to the database
+      await Rating.insertMany(ratingObjects);
+    });
+
+    await Promise.all(ratingPromises);
+
+    console.log('Rating data seeded successfully');
+  } catch (error) {
+    console.error('Error seeding data:', error);
+  }
+}
+
+seedData();
