@@ -2,24 +2,22 @@ import fs from 'fs';
 import axios from 'axios';
 
 const api_key = "245d7e38";
-const search_query = "James Bond";
+const search_query = "No Time To Die";
 
-// Descriptive endpoint
-// http://www.omdbapi.com/?t=James+Bond&plot=full&apikey=245d7e38
-
-// Make the API request
-const url = `http://www.omdbapi.com/?s=${search_query}&apikey=${api_key}`;
-axios.get(url)
-  .then((response) => {
+async function seedData() {
+  try {
+    // Make the API request
+    const url = `http://www.omdbapi.com/?s=${search_query}&apikey=${api_key}`;
+    const response = await axios.get(url);
     const data = response.data;
 
     // Create an array of movie objects with desired properties
     const movieData = data.Search.map((movie) => {
-      console.log(movie)
+      console.log(movie);
       return {
         title: movie.Title,
         year: movie.Year,
-        rated: movie.Rated 
+        rated: movie.Rated,
       };
     });
 
@@ -33,16 +31,13 @@ axios.get(url)
 
     // Save JSON data to a file
     const fileName = "data.json"; // Specify the file name here
-    fs.writeFile(fileName, jsonData, (err) => {
-      if (err) {
-        console.error("Error writing to file:", err);
-      } else {
-        console.log(`Data saved to ${fileName}`);
-      }
-    });
-  })
-  .catch((error) => {
+    await fs.promises.writeFile(fileName, jsonData);
+    console.log(`Data saved to ${fileName}`);
+  } catch (error) {
     console.error("Error retrieving movie data:", error);
-  });
+  }
+}
+
+seedData();
 
  

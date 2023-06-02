@@ -6,24 +6,14 @@ const titlesSchema = new Schema({
     type: String,
     required: true
   },
-  released: {
+  year: {
     type: Number,
     required: true
   },
-  // actors: {
-  //   type: [String],
-  //   required: true
-  // },
-  // description: {
-  //   type: String,
-  //   required: true
-  // },
-  // rating: {
-  //   type: Number,
-  //   min: 1,
-  //   max: 4,
-  //   required: true
-  // }
+   Rated: {
+    type: [String],
+    required: true
+  },
 });
 
 const titles = mongoose.model('titles', titlesSchema);
