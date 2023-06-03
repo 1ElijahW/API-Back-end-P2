@@ -7,7 +7,7 @@ import ratingRoutes from './routes/ratingRoutes.js';
 
 dotenv.config();
 
-const port = process.env.PORT || 8090;
+const port = process.env.PORT || 3030;
 
 const app = express();
 

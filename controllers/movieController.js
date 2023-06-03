@@ -1,5 +1,22 @@
 // controllers/movieController.js
-import Movie from '../models/movieModel';
+import Movie from '../models/movieModel.js';
+
+
+// const movieName = req.params.name;
+// Get all movie
+export async function getMovie(req, res) {
+  try {
+    const movie = await Movie.find();
+
+    if (!movie) {
+      return res.status(404).json({ error: 'Movie not found' });
+    }
+
+    res.json(movie);
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to fetch movie' });
+  }
+}
 
 // Get a specific Movie by name
 export async function getSingleMovie(req, res) {

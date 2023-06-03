@@ -5,6 +5,7 @@ const router = express.Router();
 
 import { getAllRatings, createRating, updateRating, deleteRating } from '../controllers/ratingController.js';
 
+
 // GET /ratings - Get all ratings
 router.get('/ratings', getAllRatings);
 

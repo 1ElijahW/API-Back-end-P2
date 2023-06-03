@@ -3,13 +3,13 @@ import fs from 'fs';
 import mongoose from 'mongoose';
 import db from './connection.js';
 import dotenv from 'dotenv';
-import Movie from './models/movie.js';
-import Rating from './models/rating.js';
+import Movie from '../models/movieModel.js';
+import Rating from '../models/ratingModel.js';
 
 dotenv.config();
 
 const api_key = process.env.API_KEY;
-const search_query = 'James Bond';
+const search_query = 'prompt'("Enter your search query (or 'all' for all movies):");
 
 async function seedData() {
   try {
@@ -68,4 +68,4 @@ async function seedData() {
   }
 }
 
-export default seedData;
+seedData()
