@@ -1,5 +1,12 @@
 import axios from 'axios';
 import fs from 'fs';
+import mongoose from 'mongoose';
+import db from './connection.js';
+import dotenv from 'dotenv';
+import Movie from './models/movie.js';
+import Rating from './models/rating.js';
+
+dotenv.config();
 
 const api_key = process.env.API_KEY;
 const search_query = 'James Bond';
@@ -8,6 +15,7 @@ async function seedData() {
   try {
     // Make the API request for movie data
     const apiUrl = `http://www.omdbapi.com/?s=${search_query}&apikey=${api_key}`;
+
     const response = await axios.get(apiUrl);
     const data = response.data;
 
@@ -23,13 +31,14 @@ async function seedData() {
       movieData.push(movieObject);
     });
 
-    // Save movieData to a JSON file
-    fs.writeFileSync('movie.json', JSON.stringify(movieData, null, 2));
+    // Save movieData to the database
+    await Movie.insertMany(movieData);
 
     console.log('Movie data seeded successfully');
 
     const ratingPromises = movieData.map(async (movie) => {
       const ratingUrl = `http://www.omdbapi.com/?i=${movie.imdbId}&apikey=${api_key}`;
+      
       const ratingResponse = await axios.get(ratingUrl);
       const ratingData = ratingResponse.data;
 
@@ -46,12 +55,16 @@ async function seedData() {
 
     const ratingData = await Promise.all(ratingPromises);
 
-    // Save the ratingData to a JSON file
-    fs.writeFileSync('rating.json', JSON.stringify(ratingData.flat(), null, 2));
+    // Save the ratingData to the database
+    const flattenedRatings = ratingData.flat();
+    await Rating.insertMany(flattenedRatings);
 
     console.log('Rating data seeded successfully');
   } catch (error) {
     console.error('Error seeding data:', error);
+  } finally {
+    // Close the database connection
+    mongoose.connection.close();
   }
 }
 
