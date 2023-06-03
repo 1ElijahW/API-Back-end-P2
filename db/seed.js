@@ -38,7 +38,7 @@ async function seedData() {
 
     const ratingPromises = movieData.map(async (movie) => {
       const ratingUrl = `http://www.omdbapi.com/?i=${movie.imdbId}&apikey=${api_key}`;
-      
+
       const ratingResponse = await axios.get(ratingUrl);
       const ratingData = ratingResponse.data;
 

@@ -19,7 +19,7 @@ export async function getSingleMovie(req, res) {
   }
 }
 
-// Update a Movie by name
+// put // Update a Movie by name
 export async function updateMovie(req, res) {
   try {
     const movieName = req.params.name;
@@ -41,7 +41,7 @@ export async function updateMovie(req, res) {
   }
 }
 
-// Create a new Movie
+// post // Create a new Movie
 export async function createMovie(req, res) {
   try {
     const movieData = req.body;

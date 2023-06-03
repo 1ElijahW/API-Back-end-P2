@@ -1,6 +1,6 @@
 ## Project Proposal
 ## Project Goal and Purpose
-The goal of this project is to create a user-friendly website called "Cineflix" that allows visitors to search for movies by title and get basic information on that film. Also view information of directors. The purpose is to provide users with an efficient way to find the movies they are looking for and expand their options by having access to a larger pool of results.
+The goal of this project is to create a user-friendly website called "Cineflix" that allows visitors to search for movies basic information on that film. Also view ratings. The purpose is to provide users with an efficient way to find the movies they are looking for and expand their options by having access to a larger pool of results.
 
 ## Choice of API and Integration
 For this project, I have chosen to use the Movies Database API. You can find the API documentation by clicking [HERE](https://www.omdbapi.com/) . I will integrate this API by making HTTP requests directly to the API endpoints using the 'Axios' method.
@@ -10,99 +10,55 @@ For this project, I have chosen to use the Movies Database API. You can find the
 As a user, I should be able to:
 
 - CRUD routes:
-- GET /titles/:name - This route is used to fetch a specific movie title by its name.
-- POST /titles/:name - This route is used to create a new movie title contributed by the user.
-- PUT /titles/:name - This route is used to update a specific movie title by its name.
-- DELETE /titles/:name - This route is used to remove a movie title by its name.
+- GET /movie/:name - This route is used to fetch a specific movie by its name.
+- POST /movie/:name - This route is used to create a new movie contributed by the user.
+- PUT /movie/:name - This route is used to update a specific movie by its name.
+- DELETE /movie/:name - This route is used to remove a movie by its name.
 
 
-- GET /directors/:name - Fetch a specific director by name.
-- POST /directors/:name - Create a new director contributed by the user.
-- PUT /directors/:name - Update a specific director by name.
-- DELETE /directors/:name - Remove a director by name.
+- GET /ratings/:name - Fetch a rating by it's id
+- POST /ratings/:name - Create a new rating contributed by the user.
+- PUT /ratings/:name - Update a specific rating by id.
+- DELETE /ratings/:name - Remove a rating by name.
 
 ## Models
-Titles Schema
+Movie Schema
 ```
-import mongoose from ('mongoose');
+import mongoose from 'mongoose';
 
-const titleSchema = new mongoose.Schema({
-  title: {
-    type: String,
-    required: true
-  },
-  year: {
-    type: Number,
-    required: true
-  },
-  director: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Director',
-    required: true
-  },
-  imdbId: {
-    type: String,
-    required: true,
-    unique: true
-  },
-  plot: {
-    type: String
-  },
-  runtime: {
-    type: String
-  },
-  genre: {
-    type: String
-  },
-  imageUrl: {
-    type: String
-  }
+const movieSchema = new mongoose.Schema({
+  title: { type: String, required: true },
+  year: { type: Number, required: true },
+  genre: { type: String, required: false },
+  director: { type: String, required: false },
+  plot: { type: String, required: false },
 });
 
-const Title = mongoose.model('Title', titleSchema);
+const Movie = mongoose.model('Movie', movieSchema);
 
-module.exports = Title;
+export default Movie;
 
 ```
-Director Schema
+Rating Schema
 ```
-import mongoose from ('mongoose');
+import mongoose from 'mongoose';
 
-const directorSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true
-  },
-  nationality: {
-    type: String,
-    required: true
-  },
-  imdbId: {
-    type: String,
-    required: true,
-    unique: true
-  },
-  bio: {
-    type: String
-  },
-  birthYear: {
-    type: Number
-  },
-  imageUrl: {
-    type: String
-  }
+const ratingSchema = new mongoose.Schema({
+  source: { type: String, required: true },
+  value: { type: Number, required: true },
 });
 
-const Director = mongoose.model('Director', directorSchema);
+const Rating = mongoose.model('Rating', ratingSchema);
 
-module.exports = Director;
+export default Rating;
+
 ```
 
 ## MVP Goals
-- As a user, I should be able to view a list of movie titles and directors
-- As a user, I should be able to view basic movie information and director info
-- As a user, I should be able to delete a movie and director
--As a user I should be able to update a movie title and director
+- As a user, I should be able to view a list of movies and ratings
+- As a user, I should be able to view basic movie information 
+- As a user, I should be able to delete a movie and rating
+- As a user I should be able to update a movie  and rating
 - As a user, I should experience a website that has a user-friendly and responsive interface.
 
 ## Stretch Goals
