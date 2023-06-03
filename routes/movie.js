@@ -8,6 +8,7 @@ router.get('/movies/:name', MoviesController.getSingleMovie);
 // Update a Movie by name
 router.put('/movies/:name', MoviesController.updateMovie);
 
+// Create a movie by name
 router.post('/movies/:name', MoviesController.createMovie);
 
 // Delete a Movie by name

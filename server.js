@@ -1,11 +1,11 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
-import seedData from './seed.js';
+import seedData from './db/seed.js';
 
 dotenv.config();
 
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 8090;
 
 const app = express();
 
@@ -21,14 +21,13 @@ mongoose
   .then(() => {
     console.log('Connected to MongoDB');
 
-    // Call the seedData function to start seeding the data
-    seedData();
   })
   .catch((error) => {
     console.error('Error connecting to MongoDB:', error);
   });
-
+  
   app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
   });
+  
 

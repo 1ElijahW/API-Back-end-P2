@@ -1,6 +1,5 @@
 import axios from 'axios';
-import Movie from './models/movie.js';
-import Rating from './models/rating.js';
+import fs from 'fs';
 
 const api_key = process.env.API_KEY;
 const search_query = 'James Bond';
@@ -12,21 +11,23 @@ async function seedData() {
     const response = await axios.get(apiUrl);
     const data = response.data;
 
+    const movieData = [];
+
     // Create an array of movie objects with desired properties
-    const movieData = data.Search.map((movie) => {
-      return {
+    data.Search.forEach((movie) => {
+      const movieObject = {
         title: movie.Title,
         year: movie.Year,
         imdbId: movie.imdbID,
       };
+      movieData.push(movieObject);
     });
 
-    // Save movieData to the database
-    await Movie.insertMany(movieData);
+    // Save movieData to a JSON file
+    fs.writeFileSync('movie.json', JSON.stringify(movieData, null, 2));
 
     console.log('Movie data seeded successfully');
 
-    // Make the API request for rating data
     const ratingPromises = movieData.map(async (movie) => {
       const ratingUrl = `http://www.omdbapi.com/?i=${movie.imdbId}&apikey=${api_key}`;
       const ratingResponse = await axios.get(ratingUrl);
@@ -37,18 +38,18 @@ async function seedData() {
         return {
           source: rating.Source,
           value: rating.Value,
-          movieId: movie._id,
         };
       });
 
-      // Save the ratings to the database
-      await Rating.insertMany(ratings);
+      return ratings;
     });
 
-    await Promise.all(ratingPromises);
+    const ratingData = await Promise.all(ratingPromises);
+
+    // Save the ratingData to a JSON file
+    fs.writeFileSync('rating.json', JSON.stringify(ratingData.flat(), null, 2));
 
     console.log('Rating data seeded successfully');
-
   } catch (error) {
     console.error('Error seeding data:', error);
   }
