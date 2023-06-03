@@ -1,6 +1,5 @@
 // controllers/movieController.js
-
-import Movie from '../models/movie.js';
+import Movie from '../models/movieModel';
 
 // Get a specific Movie by name
 export async function getSingleMovie(req, res) {

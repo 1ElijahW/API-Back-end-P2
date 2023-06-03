@@ -1,6 +1,6 @@
 // controllers/ratingController.js
 
-import Rating from '../models/rating.js';
+import Rating from '../models/ratingModel.js';
 
 // GET /ratings - Get all ratings
 export async function getAllRatings(req, res) {

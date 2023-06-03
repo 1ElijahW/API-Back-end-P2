@@ -2,8 +2,8 @@ import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import db from './db/connection.js';
-import movieRoutes from './routes/movie.js';
-import ratingRoutes from './routes/rating.js';
+import movieRoutes from './routes/movieRoutes.js';
+import ratingRoutes from './routes/ratingRoutes.js';
 
 dotenv.config();
 

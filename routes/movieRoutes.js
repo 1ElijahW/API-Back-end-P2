@@ -1,6 +1,7 @@
-import express from "express";
-import MoviesController from "../controllers/movie.js";
-const router = express.Router();
+import { Router } from 'express'
+//import movies from "../controllers/movieController.js"
+import * as controllers from '../controllers/movieController'
+const router = Router()
 
 // Get a specific Movie by name
 router.get('/movies/:name', MoviesController.getSingleMovie);
