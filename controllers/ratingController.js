@@ -16,8 +16,13 @@ export async function getAllRatings(req, res) {
 export async function createRating(req, res) {
   try {
     const { source, value } = req.body;
+    const movie = req.params.id;
 
-    const newRating = new Rating({ source, value });
+    console.log('movie: ' + movie );
+    console.log('value: ' + value );
+    console.log('source: ' + source );
+
+    const newRating = new Rating({ movie, source, value });
     const savedRating = await newRating.save();
 
     res.status(201).json(savedRating);

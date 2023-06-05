@@ -5,6 +5,11 @@
 This is a web application utilizing a 3rd-party API called [OMDBAPI](https://www.omdbapi.com). This Applicaton Programming Interface, is a RESTful web service to obtain movie information.
 
 
+## Technologies Used
+- Node.js
+- Express
+- MongoDB
+
 ## Routes
 
 - CRUD routes:

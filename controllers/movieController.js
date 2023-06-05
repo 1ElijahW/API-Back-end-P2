@@ -76,8 +76,9 @@ export async function deleteMovie(req, res) {
       return res.status(404).json({ error: 'Movie not found' });
     }
 
-    res.sendStatus(204);
+    res.sendStatus(204).json(deletedMovie);
   } catch (error) {
     res.status(500).json({ error: 'Failed to delete movie' });
   }
 }
+

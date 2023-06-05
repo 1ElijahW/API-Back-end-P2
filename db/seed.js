@@ -9,7 +9,7 @@ import Rating from '../models/ratingModel.js';
 dotenv.config();
 
 const api_key = process.env.API_KEY;
-const search_query = 'The Dark Knight' // ????
+const search_query = 'James Bond' // ????
 
 async function seedData() {
   try {
@@ -25,19 +25,21 @@ async function seedData() {
     data.Search.forEach((movie) => {
       const movieObject = {
         title: movie.Title,
-        year: movie.Year,
-        imdbId: movie.imdbID,
+        Year: movie.Year,
+        imdbID: movie.imdbID,
       };
       movieData.push(movieObject);
     });
 
-    // Save movieData to the database
+    console.log(movieData);
+
+    // Save movieData to the database // HERE : save?
     await Movie.insertMany(movieData);
 
     console.log('Movie data seeded successfully');
 
     const ratingPromises = movieData.map(async (movie) => {
-      const ratingUrl = `http://www.omdbapi.com/?i=${movie.imdbId}&apikey=${api_key}`;
+      const ratingUrl = `http://www.omdbapi.com/?i=${movie.imdbID}&apikey=${api_key}`;
 
       const ratingResponse = await axios.get(ratingUrl);
       const ratingData = ratingResponse.data;

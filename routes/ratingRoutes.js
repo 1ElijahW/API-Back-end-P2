@@ -11,8 +11,8 @@ import {
 // GET /ratings - Get all ratings
 router.get('/ratings', getAllRatings); // works
 
-// POST /ratings - Create a new rating
-router.post('/ratings', createRating); // works
+// POST /ratings/:id - Create a new rating
+router.post('/ratings/:id', createRating); // works
 
 // PUT /ratings/:id - Update a rating by ID
 router.put('/ratings/:id', updateRating); // works
