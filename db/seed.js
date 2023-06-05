@@ -9,7 +9,7 @@ import Rating from '../models/ratingModel.js';
 dotenv.config();
 
 const api_key = process.env.API_KEY;
-const search_query = 'prompt'("Enter your search query (or 'all' for all movies)");
+const search_query = 'The Dark Knight' // ????
 
 async function seedData() {
   try {

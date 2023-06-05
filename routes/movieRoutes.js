@@ -1,22 +1,32 @@
-import { Router } from 'express'
+import { Router } from 'express';
+import {
+  getMovieById,
+  updateMovie,
+  createMovie,
+  deleteMovie,
+  getMovies,
+} from '../controllers/movieController.js';
 
-//import movies from "../controllers/movieController.js"
-import { getSingleMovie, updateMovie, createMovie, deleteMovie, getMovies,} from '../controllers/movieController.js'
-const router = Router()
+const router = Router();
 
 // Get all movies
-router.get('/movies', getMovies);
+router.get('/movies', getMovies); //works: http://localhost:3030/movies
 
-// Get a specific Movie by name
-router.get('/movie/:name', getSingleMovie);
+// Get movie by id
+router.get('/movie/id/:id', getMovieById); //works: http://localhost:3030/movie/id/647b7fd327d6f60e456926de
 
-// Update a Movie by name
-router.put('/movie/:name', updateMovie);
+// Update a Movie by id
+router.put('/movie/:id', updateMovie); //works: http://localhost:3030/movie/647b7fd327d6f60e456926de
 
-// Create a movie by name
-router.post('/movie/:name', createMovie);
+/*input: {
+      "title": "James Bond 007: YES",
+      "year": "2010"
+  }*/
 
-// Delete a Movie by name
-router.delete('/movie/:name', deleteMovie);
+// Create a movie
+router.post('/movie', createMovie); // works: http://localhost:3030/movie
+
+// Delete a Movie by id
+router.delete('/movie/:id', deleteMovie); // works: 
 
 export default router;
