@@ -10,16 +10,16 @@ For this project, I have chosen to use the Movies Database API. You can find the
 As a user, I should be able to:
 
 - CRUD routes:
-- GET /movie/:name - This route is used to fetch a specific movie by its name.
-- POST /movie/:name - This route is used to create a new movie contributed by the user.
-- PUT /movie/:name - This route is used to update a specific movie by its name.
-- DELETE /movie/:name - This route is used to remove a movie by its name.
+- GET /movie/:id - This route is used to fetch a specific movie by its id.
+- POST /movie/:id - This route is used to create a new movie contributed by the user.
+- PUT /movie/:id - This route is used to update a specific movie by its id.
+- DELETE /movie/:id - This route is used to remove a movie by its id.
 
 
-- GET /ratings/:name - Fetch a rating by it's id
-- POST /ratings/:name - Create a new rating contributed by the user.
-- PUT /ratings/:name - Update a specific rating by id.
-- DELETE /ratings/:name - Remove a rating by name.
+- GET /ratings/:id - Fetch a rating by it's id
+- POST /ratings/:id - Create a new rating contributed by the user.
+- PUT /ratings/:id - Update a specific rating by id.
+- DELETE /ratings/:id - Remove a rating by id.
 
 ## Models
 Movie Schema
@@ -62,7 +62,7 @@ export default Rating;
 - As a user, I should experience a website that has a user-friendly and responsive interface.
 
 ## Stretch Goals
-- As a user, I would like to be able to create an account to save a list of films.
+- As a user, I would like to be able to create an account to save a list of films.(authentication)
 - As a user, I would like to search by specific genres. 
 - As a user, I would like to share movies with friends.
 
